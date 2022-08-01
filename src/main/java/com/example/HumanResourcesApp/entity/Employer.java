@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.File;
 import java.util.Date;
 
 @Getter
@@ -26,6 +27,7 @@ public class Employer {
     private String address; /* must include only city and country by separated " - " */
     private String email;
     private String marital_status;
-
+    private String title;
+    private String supervisor;
 
 }
