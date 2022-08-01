@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -18,10 +19,13 @@ public class Employer {
     private Long id;
 
     private String name;
+    private String surname;
+    private Date birth_date;
     private Integer age;
-    private String address;
+    private String mobile;
+    private String address; /* must include only city and country by separated " - " */
     private String email;
-
+    private String marital_status;
 
 
 }
