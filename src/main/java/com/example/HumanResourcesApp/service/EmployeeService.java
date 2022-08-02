@@ -1,43 +1,43 @@
 package com.example.HumanResourcesApp.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import com.example.HumanResourcesApp.entity.Employer;
-import com.example.HumanResourcesApp.repository.EmployeeRepository;
+import com.example.HumanResourcesApp.entity.Employee;
+import com.example.HumanResourcesApp.repository.IEmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
-public class EmployeeService implements EmployeeServiceInterfaces{
+public class EmployeeService implements IEmployeeService{
 
     @Autowired
-    EmployeeRepository employeeRepository;
+    IEmployeeRepository employeeRepository;
 
     @Override
-    public void createEmployer(Employer employee) {
+    public void createEmployee(Employee employee) {
         employeeRepository.save(employee);
     }
 
     @Override
-    public void updateEmployer(Long id, Employer updateEmployee) {
-        Optional<Employer> old = employeeRepository.findById(id);
-
-        if(old.isPresent()){
-            updateEmployee.setId(old.get().getId());
-            employeeRepository.save(updateEmployee);
-        }
-
-    }
-
-    @Override
-    public void deleteEmployer(Long id) {
+    public void deleteEmployee(Long id) {
         employeeRepository.deleteById(id);
+        employeeRepository.saveAll(employeeRepository.findAll());
     }
 
     @Override
-    public List<Employer> getEmployers() {
+    public List<Employee> getEmployees() {
         return employeeRepository.findAll();
+    }
+
+    @Override
+    public void updateEmployee(Long id, Employee updatedEmployee) {
+        Optional<Employee> oldEmployee = employeeRepository.findById(id);
+
+        if(oldEmployee.isPresent()){
+            updatedEmployee.setId(oldEmployee.get().getId());
+            employeeRepository.save(updatedEmployee);
+        }
     }
 }
 
