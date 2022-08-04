@@ -38,4 +38,8 @@ public class Employee {
     @JsonBackReference
     private Department department;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Project project;
+
 }
