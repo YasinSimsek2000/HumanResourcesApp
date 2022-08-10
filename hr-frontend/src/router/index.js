@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import App from "@/App";
-import SignInPage from "@/SignInPage";
+import LogInPage from "@/views/LogInPage";
+import SignInPage from "@/views/SignInPage";
 
 Vue.use(VueRouter)
 
-const routers = [
+const routes = [
   {
     path: "/",
-    name: 'app',
-    component: App
+    name: 'log-in',
+    component: LogInPage
   },
 
   {
@@ -17,14 +17,12 @@ const routers = [
     name: 'sign-in',
     component: SignInPage
   }
-
-
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routers
+  routes
 })
 
 export default router
