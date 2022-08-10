@@ -1,29 +1,30 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/SignUpPage.vue'
-import AboutView from '../views/LogInPage.vue'
+import App from "@/App";
+import SignInPage from "@/SignInPage";
 
 Vue.use(VueRouter)
 
-const routes = [
+const routers = [
   {
-    path: '/',
-    name: 'HomeView',
-    component: HomeView
+    path: "/",
+    name: 'app',
+    component: App
   },
 
   {
-    path: '/about',
-    name: 'about',
-    component: AboutView
+    path: "/sign-in",
+    name: 'sign-in',
+    component: SignInPage
   }
+
 
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routers
 })
 
 export default router
