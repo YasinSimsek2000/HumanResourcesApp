@@ -27,3 +27,5 @@ values (3, 'Ankara - Turkey', 45, '1973-11-17 10:00:00',
 
 insert into project(id, project_name, head_of_project_id) values (1, 'Microservices', 1);
 insert into project(id, project_name, head_of_project_id) values (2, 'Vue.js', 3);
+
+insert into manager(id, email, name, password, surname) values(1, 'simsekyasin2900@gmail.com', 'Yasin', '1234', 'Şimşek');

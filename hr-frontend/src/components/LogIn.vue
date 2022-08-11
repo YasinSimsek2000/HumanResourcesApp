@@ -1,6 +1,6 @@
 <template>
     <v-card style="display: flex; justify-content: center; margin-left: 25%; margin-right: 25%">
-      <v-col style="background-color: powderblue">
+      <v-col style="background-color: white">
 
         <v-card style="display: flex; justify-content: center;">
           <v-col cols="6" style="display: flex; justify-content: center; background-color: lightblue">
@@ -29,6 +29,7 @@
                 class="ma-2"
                 outlined
                 color="indigo"
+                href="/new-password"
             >
               Forgot Your Password?
             </v-btn>
