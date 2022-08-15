@@ -33,7 +33,7 @@
         <v-col cols="6">
         </v-col>
 
-        <v-col cols="6">
+        <v-col cols="6" style="display: flex; justify-content: center">
           <v-btn
               class="ma-2"
               outlined

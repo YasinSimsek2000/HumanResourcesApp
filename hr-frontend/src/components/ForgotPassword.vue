@@ -13,15 +13,17 @@
               label="E-Mail"
               :rules="rules1"
               hide-details="auto"
+              v-model="email"
           ></v-text-field>
         </v-col>
 
-        <v-col cols="5">
+        <v-col cols="5" style="display: flex; justify-content: center">
           <v-btn
               class="ma-2"
               outlined
               color="indigo"
-              @click="enterPassword"
+              @click="setValid(); sendCode()"
+              width="100%"
           >
             Send Reset E-Mail
           </v-btn>
@@ -33,15 +35,49 @@
           <v-text-field
               label="Enter the password in e-mail"
               hide-details="auto"
+              v-model="code"
           ></v-text-field>
         </v-col>
 
-        <v-col cols="5">
+        <v-col cols="5" style="display: flex; justify-content: center">
           <v-btn
               class="ma-2"
               outlined
               color="indigo"
-              width="95%"
+              width="100%"
+              @click="confirm"
+          >
+            Confirm
+          </v-btn>
+        </v-col>
+      </v-row>
+
+      <v-row  v-if="confirmPassed">
+        <v-col cols="4">
+          <v-text-field
+              label="Enter new password"
+              hide-details="auto"
+              v-model="newPassword"
+              :rules="rules2"
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="4">
+          <v-text-field
+              label="Enter new password again"
+              hide-details="auto"
+              v-model="newPasswordAgain"
+              :rules="rules2"
+          ></v-text-field>
+        </v-col>
+
+        <v-col cols="4" style="display: flex; justify-content: center">
+          <v-btn
+              class="ma-2"
+              outlined
+              color="indigo"
+              width="100%"
+              @click="saveNewPassword"
           >
             Confirm
           </v-btn>
@@ -52,21 +88,74 @@
 </template>
 
 <script>
+import axios from 'axios';
+let number;
 export default {
 
   data () {
-    return { buttonClicked: false }
+    return { buttonClicked: false ,email : '', code : 0, confirmPassed: false, newPassword : '', newPasswordAgain : '',
+      rules1: [
+        value => !!value || 'Required.',
+        value => (value && value.includes("@") && value.includes(".com")) || 'Invalid e-mail address',
+      ],
+
+      rules2 : [
+          value => (value.length >= 8) || 'It must be include at least 8 character!',
+      ],
+    }
   },
 
-  rules1: [
-    value => !!value || 'Required.',
-    value => (value && value.includes("@") && value.includes(".com")) || 'Invalid e-mail address',
-  ],
-
   methods: {
-    enterPassword () {
-      this.buttonClicked = true;
+
+    setValid () {
+      let result = this.email.match("[@][A-Za-z]*.com");
+      if (result.length === 1) {
+        this.buttonClicked = true;
+      }
     },
+
+    isMailValid () {
+      return this.buttonClicked;
+    },
+
+    isCodeRight () {
+      return number === this.code;
+    },
+
+    sendCode () {
+      if (this.isMailValid()) {
+        number = Math.floor(Math.random() * 999999) + 100000;
+        axios.post('http://localhost:8080/sendMail', {
+          recipient: 'simsekyasin2929@gmail.com',
+          msgBody: 'Enter this code to continue: ' + number,
+          subject :'Simple Email Massage'
+        })
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+      }
+
+      console.log(number);
+
+    },
+
+    confirm () {
+      this.code = (parseInt(this.code) === number) ? true : 'Wrong Code!';
+      if (this.code === true) {
+        this.buttonClicked = false;
+        this.confirmPassed = true;
+      }
+    },
+
+    saveNewPassword () {
+      if (this.newPassword === this.newPasswordAgain) {
+        alert('You can continue with your new password.');
+        window.location = "/";
+      }
+    }
   }
 }
 </script>
