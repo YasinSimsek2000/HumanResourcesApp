@@ -124,7 +124,7 @@ export default {
         number = Math.floor(Math.random() * 999999) + 100000;
         axios.post('http://localhost:8080/sendMail', {
           recipient: this.email,
-          msgBody: 'Enter this code to continue: ' + number,
+          messageBody: 'Enter this code to continue: ' + number,
           subject :'Forgot Your Password?'
         })
             .then(function (response) {

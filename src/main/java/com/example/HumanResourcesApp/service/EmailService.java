@@ -36,7 +36,7 @@ public class EmailService implements IEmailService {
 
                 mailMessage.setFrom(sender);
                 mailMessage.setTo(details.getRecipient());
-                mailMessage.setText(details.getMsgBody());
+                mailMessage.setText(details.getMessageBody());
                 mailMessage.setSubject(details.getSubject());
 
                 javaMailSender.send(mailMessage);
@@ -58,7 +58,7 @@ public class EmailService implements IEmailService {
             mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
             mimeMessageHelper.setFrom(sender);
             mimeMessageHelper.setTo(details.getRecipient());
-            mimeMessageHelper.setText(details.getMsgBody());
+            mimeMessageHelper.setText(details.getMessageBody());
             mimeMessageHelper.setSubject(details.getSubject());
 
             // Adding the attachment

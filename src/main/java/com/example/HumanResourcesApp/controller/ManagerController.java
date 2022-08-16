@@ -15,9 +15,16 @@ public class ManagerController {
     ManagerService ManagerService;
 
     @RequestMapping(value = "/createManager", method = RequestMethod.POST)
-    public ResponseEntity<Object> createManager (@RequestBody Manager manager) {
-        ManagerService.createManager(manager);
-        return new ResponseEntity<>(manager, HttpStatus.CREATED);
+    public ResponseEntity<Object> createManager (@RequestBody Manager manager) throws Exception {
+        if (ManagerService.getManagerByMail(manager.getEmail()).isPresent()) {
+            throw new Exception("There is an existing manager with the same mail address.");
+        }
+
+        else {
+            ManagerService.createManager(manager);
+            return new ResponseEntity<>(manager, HttpStatus.CREATED);
+        }
+
     }
 
     @RequestMapping(value = "/deleteManager", method = RequestMethod.DELETE)
