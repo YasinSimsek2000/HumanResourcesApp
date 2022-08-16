@@ -1,5 +1,6 @@
 package com.example.HumanResourcesApp.service;
 
+import com.example.HumanResourcesApp.dto.ManagerDto;
 import com.example.HumanResourcesApp.entity.Manager;
 import com.example.HumanResourcesApp.repository.IManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,10 @@ public class ManagerService implements IManagerService {
     IManagerRepository managerRepository;
 
     @Override
-    public void createManager(Manager manager) { managerRepository.save(manager); }
+    public void createManager(Manager manager) {
+        manager.setPassword(hashPassword(manager.getPassword()));
+        managerRepository.save(manager);
+    }
 
     @Override
     public void deleteManager(Long id) {
@@ -27,12 +31,27 @@ public class ManagerService implements IManagerService {
     public List<Manager> getManager() { return managerRepository.findAll(); }
 
     @Override
-    public void updateManager(Long id, Manager updatedManager) {
-        Optional<Manager> oldManager = managerRepository.findById(id);
+    public Optional<Manager> getManagerByMail(String email) { return managerRepository.findManagerByEmail(email); }
+
+    @Override
+    public void updateManager(ManagerDto managerDto) {
+        Optional<Manager> oldManager = managerRepository.findManagerByEmail(managerDto.getEmail());
 
         if (oldManager.isPresent()) {
-            updatedManager.setId(oldManager.get().getId());
-            managerRepository.save(updatedManager);
+            oldManager.get().setPassword(hashPassword(managerDto.getPassword()));
+            managerRepository.save(oldManager.get());
         }
+    }
+
+    private String hashPassword (String password) {
+        String newPassword = "";
+
+        for (int x = 0; x < password.length(); x++) {
+            int newChar = password.charAt(x);
+            int code = (newChar + 30 % 127 < 33) ? newChar - 30 : newChar + 30;
+            newPassword += (char)code;
+        }
+
+        return newPassword;
     }
 }

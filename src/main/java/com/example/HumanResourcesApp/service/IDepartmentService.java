@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface IDepartmentService {
 
-    public abstract void createDepartment(Department department);
-    public abstract void deleteDepartment(Long id);
-    public abstract List<Department> getDepartments();
-    public abstract void updateDepartment(Long id, Department department);
+    void createDepartment(Department department);
+    void deleteDepartment(Long id);
+    List<Department> getDepartments();
+    void updateDepartment(Long id, Department department);
 }

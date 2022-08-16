@@ -79,7 +79,7 @@
               width="100%"
               @click="saveNewPassword"
           >
-            Confirm
+            SAVE
           </v-btn>
         </v-col>
       </v-row>
@@ -93,7 +93,7 @@ let number;
 export default {
 
   data () {
-    return { buttonClicked: false ,email : '', code : 0, confirmPassed: false, newPassword : '', newPasswordAgain : '',
+    return { buttonClicked: false ,email : '', code : '', confirmPassed: false, newPassword : '', newPasswordAgain : '',
       rules1: [
         value => !!value || 'Required.',
         value => (value && value.includes("@") && value.includes(".com")) || 'Invalid e-mail address',
@@ -118,17 +118,14 @@ export default {
       return this.buttonClicked;
     },
 
-    isCodeRight () {
-      return number === this.code;
-    },
 
     sendCode () {
       if (this.isMailValid()) {
         number = Math.floor(Math.random() * 999999) + 100000;
         axios.post('http://localhost:8080/sendMail', {
-          recipient: 'simsekyasin2929@gmail.com',
+          recipient: this.email,
           msgBody: 'Enter this code to continue: ' + number,
-          subject :'Simple Email Massage'
+          subject :'Forgot Your Password?'
         })
             .then(function (response) {
               console.log(response);
@@ -151,9 +148,29 @@ export default {
     },
 
     saveNewPassword () {
+
+      const manager = {
+        email: this.email,
+        password: this.newPassword
+      }
+
       if (this.newPassword === this.newPasswordAgain) {
+        axios.put('http://localhost:8080/updateManager', manager)
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+
         alert('You can continue with your new password.');
         window.location = "/";
+      }
+
+      else {
+        alert('Try again! The passwords do not pair.');
+
+
       }
     }
   }

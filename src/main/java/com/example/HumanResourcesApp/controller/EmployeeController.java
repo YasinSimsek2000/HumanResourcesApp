@@ -13,26 +13,26 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
-    @RequestMapping(value = "/employees")
-    public ResponseEntity<Object> getEmployee() {
+    @RequestMapping(value = "/getEmployees")
+    public ResponseEntity<Object> getEmployees() {
         return new ResponseEntity<>(employeeService.getEmployees(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/employees", method = RequestMethod.POST)
+    @RequestMapping(value = "/createEmployee", method = RequestMethod.POST)
     public ResponseEntity<Object> createEmployee(@RequestBody Employee employee) {
         employeeService.createEmployee(employee);
         return new ResponseEntity<>(employee, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/employees/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> deleteEmployee(@PathVariable("id") Long id) {
+    @RequestMapping(value = "/deleteEmployee", method = RequestMethod.DELETE)
+    public ResponseEntity<Object> deleteEmployee(@RequestBody Long id) {
         employeeService.deleteEmployee(id);
         return new ResponseEntity<>(employeeService.getEmployees(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/employees/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Object> updateEmployee(@PathVariable("id") Long id, @RequestBody Employee employee) {
-        employeeService.updateEmployee(id, employee);
+    @RequestMapping(value = "/updateEmployee", method = RequestMethod.PUT)
+    public ResponseEntity<Object> updateEmployee(@RequestBody Employee employee) {
+        employeeService.updateEmployee(employee.getId(), employee);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 }

@@ -5,8 +5,8 @@ import java.util.List;
 
 public interface IProjectService {
 
-    public abstract void createProject(Project project);
-    public abstract void deleteProject(Long id);
-    public abstract List<Project> getProjects();
-    public abstract void updateProject(Long id, Project project);
+     void createProject(Project project);
+     void deleteProject(Long id);
+     List<Project> getProjects();
+     void updateProject(Long id, Project project);
 }

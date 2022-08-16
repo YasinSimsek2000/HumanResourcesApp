@@ -17,7 +17,7 @@ public class EMailController {
 
     // Sending a simple Email
     @PostMapping("/sendMail")
-    public String sendMail(@RequestBody EmailDetails details) {
+    public String sendMail(@RequestBody EmailDetails details) throws Exception {
         String status = emailService.sendSimpleMail(details);
         return status;
     }

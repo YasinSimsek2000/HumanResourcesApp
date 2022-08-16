@@ -13,27 +13,26 @@ public class ProjectController {
     @Autowired
     ProjectService projectService;
 
-    @RequestMapping(value = "/projects", method = RequestMethod.POST)
+    @RequestMapping(value = "/createProject", method = RequestMethod.POST)
     public ResponseEntity<Object> createProject (@RequestBody Project project) {
         projectService.createProject(project);
         return new ResponseEntity<>(project, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/projects/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> deleteProject (@PathVariable("id") Long id) {
+    @RequestMapping(value = "/deleteProject", method = RequestMethod.DELETE)
+    public ResponseEntity<Object> deleteProject (@RequestBody Long id) {
         projectService.deleteProject(id);
         return new ResponseEntity<>(projectService.getProjects(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/projects")
-    public ResponseEntity<Object> getProject () {
+    @RequestMapping(value = "/getProjects")
+    public ResponseEntity<Object> getProjects () {
         return new ResponseEntity<>(projectService.getProjects(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/projects/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Object> updateProject (@PathVariable("id") Long id,  @RequestBody Project project) {
-        projectService.updateProject(id, project);
+    @RequestMapping(value = "/updateProject", method = RequestMethod.PUT)
+    public ResponseEntity<Object> updateProject ( @RequestBody Project project) {
+        projectService.updateProject(project.getId(), project);
         return new ResponseEntity<>(project, HttpStatus.OK);
     }
-
 }

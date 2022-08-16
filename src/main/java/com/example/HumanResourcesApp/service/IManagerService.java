@@ -1,12 +1,20 @@
 package com.example.HumanResourcesApp.service;
 
+import com.example.HumanResourcesApp.dto.ManagerDto;
 import com.example.HumanResourcesApp.entity.Manager;
+
 import java.util.List;
+import java.util.Optional;
 
 public interface IManagerService {
 
-    public abstract void createManager (Manager manager);
-    public abstract void deleteManager(Long id);
-    public abstract List<Manager> getManager ();
-    public abstract void updateManager(Long id, Manager manager);
+    void createManager(Manager manager);
+
+    void deleteManager(Long id);
+
+    List<Manager> getManager();
+
+    Optional<Manager> getManagerByMail(String email);
+
+    void updateManager(ManagerDto manager);
 }
