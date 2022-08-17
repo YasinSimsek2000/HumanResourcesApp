@@ -4,7 +4,7 @@
 
         <v-card style="display: flex; justify-content: center;">
           <v-col cols="6" style="display: flex; justify-content: center; background-color: lightblue">
-            <a href="/sign-up" style="text-decoration: none;">SIGN IN</a>
+            <a href="/sign-up" style="text-decoration: none;">SIGN UP</a>
           </v-col>
 
           <v-col cols="6" style="display: flex; justify-content: center">
@@ -16,12 +16,17 @@
             label="E-Mail"
             :rules="rules1"
             hide-details="auto"
+            v-model="email"
+            v-on:keyup.enter="logIn"
         ></v-text-field>
 
         <v-text-field
-            label="Password">
-          :rules="rules2"
-        </v-text-field>
+            label="Password"
+            :rules="rules2"
+            hide-details="auto"
+            v-model="password"
+            v-on:keyup.enter="logIn"
+          ></v-text-field>
 
         <v-row>
           <v-col cols="6" style="display: flex; justify-content: center">
@@ -42,6 +47,7 @@
                 outlined
                 color="indigo"
                 width="100%"
+                @click="logIn"
             >
               Log In
             </v-btn>
@@ -52,18 +58,55 @@
 </template>
 
 <script>
-export default {
-  data: () => ({
-    rules1: [
-      value => !!value || 'Required.',
-      value => (value && value.includes("@") && value.includes(".com")) || 'Invalid e-mail address',
-    ],
+import axios from "axios";
 
-    rules2: [
-      value => !!value || 'Enter at least 8 character',
-      value => (value && value.length >= 8) || 'Min 8 characters',
-    ],
-  }),
+export default {
+
+  data () {
+    return { email:'', password: '',
+      rules1: [
+        value => !!value || 'Required.',
+        value => (value && value.includes("@") && value.includes(".com")) || 'Invalid e-mail address',
+      ],
+
+      rules2: [
+        value => !!value || 'Enter at least 8 character',
+        value => (value && value.length >= 8) || 'Min 8 characters',
+      ],
+    }
+  },
+
+  methods : {
+
+    isDataValid() {
+      let mailValid = this.email.match("[@][A-Za-z]*.com").length === 1;
+      let passwordValid = this.password.length >= 8;
+      return mailValid && passwordValid;
+    },
+
+    logIn () {
+
+      const manager = {
+        email: this.email,
+        password: this.password
+      }
+
+      if (this.isDataValid()) {
+        axios.post('http://localhost:8080/checkManager', manager)
+            .then(function (response) {
+              console.log(response);
+              window.location = '/mainPage';
+            })
+
+            .catch(function (error) {
+              console.log(error);
+              alert('Wrong e-mail address or wrong password. Please try again.')
+            });
+
+      }
+    }
+  },
+
 }
 </script>
 

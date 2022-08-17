@@ -18,6 +18,7 @@
           hide-details="auto"
           :rules="rules0"
           v-model="name"
+          v-on:keyup.enter="saveNewManager"
       ></v-text-field>
 
       <v-text-field
@@ -25,6 +26,7 @@
           hide-details="auto"
           :rules="rules0"
           v-model="surname"
+          v-on:keyup.enter="saveNewManager"
       ></v-text-field>
 
       <v-text-field
@@ -32,12 +34,14 @@
           :rules="rules1"
           hide-details="auto"
           v-model="email"
+          v-on:keyup.enter="saveNewManager"
       ></v-text-field>
 
       <v-text-field
           label="Password"
           :rules="rules2"
           v-model="newPassword"
+          v-on:keyup.enter="saveNewManager"
         ></v-text-field>
 
       <v-row>
@@ -86,6 +90,7 @@ export default {
 
   methods : {
 
+
     isDataValid() {
       let nameValid = this.name.length > 0;
       let surnameValid = this.surname.length > 0;
@@ -97,38 +102,34 @@ export default {
     saveNewManager () {
 
       const manager = {
-        id: 1,
         email: this.email,
         name: this.name,
         password: this.newPassword,
         surname: this.surname
       }
-      let flag = true;
+
       if (this.isDataValid()) {
         axios.post('http://localhost:8080/createManager', manager )
-            .then(function (response1) {
-              flag = true;
-              console.log(response1);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-        console.log(flag);
-      if(flag){
-        axios.post('http://localhost:8080/sendMail', {
-          recipient: this.email,
-          messageBody: 'Your account data:\nName: ' + this.name + '\nSurname: ' + this.surname + '\nPassword: ' + this.newPassword,
-          subject :'Welcome to Human Resources Application!'
-        })
             .then(function (response) {
               console.log(response);
+              axios.post('http://localhost:8080/sendMail', {
+                recipient: manager.email,
+                messageBody: 'We are happy you joined us. Your account data:\nName: ' + manager.name + '\nSurname: '
+                              + manager.surname + '\nPassword: ' + manager.password,
+                subject :'Welcome to Human Resources Application!'
+              })
+                  .then(function () {
+                    alert('Account was created successfully!');
+                    window.location = '/mainPage';
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
             })
+
             .catch(function (error) {
               console.log(error);
             });
-      }
-
-
       }
 
       else {

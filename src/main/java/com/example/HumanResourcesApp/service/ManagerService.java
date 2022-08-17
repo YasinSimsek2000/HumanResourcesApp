@@ -43,7 +43,7 @@ public class ManagerService implements IManagerService {
         }
     }
 
-    private String hashPassword (String password) {
+    public String hashPassword (String password) {
         String newPassword = "";
 
         for (int x = 0; x < password.length(); x++) {

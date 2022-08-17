@@ -8,44 +8,58 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 @RestController
 @CrossOrigin("*")
 public class ManagerController {
     @Autowired
-    ManagerService ManagerService;
+    ManagerService managerService;
+
+    @RequestMapping(value = "/checkManager", method = RequestMethod.POST)
+    public void checkManager (@RequestBody ManagerDto managerDto) throws Exception {
+        if (managerService.getManagerByMail(managerDto.getEmail()).isEmpty()) {
+            throw new Exception("There is no existing manager with the same mail address.");
+        }
+
+        else if (!Objects.equals(managerService.hashPassword(managerDto.getPassword()), managerService.getManagerByMail(managerDto.getEmail()).get().getPassword())) {
+            throw new Exception("Wrong password!");
+        }
+    }
 
     @RequestMapping(value = "/createManager", method = RequestMethod.POST)
     public ResponseEntity<Object> createManager (@RequestBody Manager manager) throws Exception {
-        if (ManagerService.getManagerByMail(manager.getEmail()).isPresent()) {
+        if (managerService.getManagerByMail(manager.getEmail()).isPresent()) {
             throw new Exception("There is an existing manager with the same mail address.");
         }
 
         else {
-            ManagerService.createManager(manager);
+            managerService.createManager(manager);
             return new ResponseEntity<>(manager, HttpStatus.CREATED);
         }
-
     }
 
     @RequestMapping(value = "/deleteManager", method = RequestMethod.DELETE)
     public ResponseEntity<Object> deleteManager (@RequestBody Long id) {
-        ManagerService.deleteManager(id);
-        return new ResponseEntity<>(ManagerService.getManager(), HttpStatus.OK);
+        managerService.deleteManager(id);
+        return new ResponseEntity<>(managerService.getManager(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/getManagers", method = RequestMethod.GET)
     public ResponseEntity<Object> getManagers () {
-        return new ResponseEntity<>(ManagerService.getManager(), HttpStatus.OK);
+        return new ResponseEntity<>(managerService.getManager(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/getManagerByMail", method = RequestMethod.GET)
     public ResponseEntity<Object> getManagerByMail (@RequestBody String email) {
-        return new ResponseEntity<>(ManagerService.getManagerByMail(email), HttpStatus.OK);
+        return new ResponseEntity<>(managerService.getManagerByMail(email), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/updateManager", method = RequestMethod.PUT)
     public ResponseEntity<Object> updateManager (@RequestBody ManagerDto managerdto) {
-        ManagerService.updateManager(managerdto);
+        managerService.updateManager(managerdto);
         return new ResponseEntity<>(managerdto, HttpStatus.OK);
     }
+
+
 }

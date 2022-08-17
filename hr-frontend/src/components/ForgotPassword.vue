@@ -8,7 +8,7 @@
       <p style="text-align: center">No Problem! Enter your email or username below and we will send you an email with instruction to reset your password.</p>
       <p style="text-align: center; font-weight: bold" >If you have an account, you will get an e-mail.</p>
       <v-row>
-        <v-col cols="7">
+        <v-col cols="8">
           <v-text-field
               label="E-Mail"
               :rules="rules1"
@@ -17,7 +17,7 @@
           ></v-text-field>
         </v-col>
 
-        <v-col cols="5" style="display: flex; justify-content: center">
+        <v-col cols="4" style="display: flex; justify-content: center">
           <v-btn
               class="ma-2"
               outlined
@@ -31,7 +31,7 @@
       </v-row>
 
       <v-row  v-if="buttonClicked">
-        <v-col cols="7">
+        <v-col cols="8">
           <v-text-field
               label="Enter the password in e-mail"
               hide-details="auto"
@@ -39,7 +39,7 @@
           ></v-text-field>
         </v-col>
 
-        <v-col cols="5" style="display: flex; justify-content: center">
+        <v-col cols="4" style="display: flex; justify-content: center">
           <v-btn
               class="ma-2"
               outlined
@@ -117,7 +117,6 @@ export default {
     isMailValid () {
       return this.buttonClicked;
     },
-
 
     sendCode () {
       if (this.isMailValid()) {

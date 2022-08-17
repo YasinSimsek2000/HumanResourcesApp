@@ -13,9 +13,11 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
+
 public class EmailService implements IEmailService {
 
     @Autowired
@@ -64,7 +66,7 @@ public class EmailService implements IEmailService {
             // Adding the attachment
             FileSystemResource file = new FileSystemResource( new File(details.getAttachment()) );
 
-            mimeMessageHelper.addAttachment( file.getFilename(), file );
+            mimeMessageHelper.addAttachment(Objects.requireNonNull(file.getFilename()), file );
             javaMailSender.send(mimeMessage);
             return "Mail sent Successfully";
         }
