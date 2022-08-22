@@ -12,8 +12,8 @@
         </v-col>
       </v-card>
 
-
       <v-text-field
+          type="text"
           label="Name"
           hide-details="auto"
           :rules="rules0"
@@ -22,6 +22,7 @@
       ></v-text-field>
 
       <v-text-field
+          type="text"
           label="Surname"
           hide-details="auto"
           :rules="rules0"
@@ -30,6 +31,7 @@
       ></v-text-field>
 
       <v-text-field
+          type="text"
           label="E-Mail"
           :rules="rules1"
           hide-details="auto"
@@ -38,6 +40,7 @@
       ></v-text-field>
 
       <v-text-field
+          type="password"
           label="Password"
           :rules="rules2"
           v-model="newPassword"

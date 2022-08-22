@@ -13,17 +13,17 @@
         </v-card>
 
         <v-text-field
+            type="text"
             label="E-Mail"
             :rules="rules1"
-            hide-details="auto"
             v-model="email"
             v-on:keyup.enter="logIn"
         ></v-text-field>
 
         <v-text-field
+            type="password"
             label="Password"
             :rules="rules2"
-            hide-details="auto"
             v-model="password"
             v-on:keyup.enter="logIn"
           ></v-text-field>

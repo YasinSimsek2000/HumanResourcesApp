@@ -10,6 +10,7 @@
       <v-row>
         <v-col cols="8">
           <v-text-field
+              type="text"
               label="E-Mail"
               :rules="rules1"
               hide-details="auto"
@@ -33,7 +34,8 @@
       <v-row  v-if="buttonClicked">
         <v-col cols="8">
           <v-text-field
-              label="Enter the password in e-mail"
+              type="text"
+              label="Enter the code in e-mail"
               hide-details="auto"
               v-model="code"
           ></v-text-field>
@@ -55,6 +57,7 @@
       <v-row  v-if="confirmPassed">
         <v-col cols="4">
           <v-text-field
+              type="password"
               label="Enter new password"
               hide-details="auto"
               v-model="newPassword"
@@ -64,6 +67,7 @@
 
         <v-col cols="4">
           <v-text-field
+              type="password"
               label="Enter new password again"
               hide-details="auto"
               v-model="newPasswordAgain"
