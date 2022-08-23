@@ -28,9 +28,7 @@ public class Employee {
     private String mobile;
     private String name;
 
-    public String getEmail() {
-        return email;
-    }
+
 
     @OneToOne
     private Employee supervisor;
@@ -45,5 +43,9 @@ public class Employee {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     private Project project;
+
+    public String getEmail() {
+        return email;
+    }
 
 }

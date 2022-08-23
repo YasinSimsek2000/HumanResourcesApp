@@ -14,6 +14,7 @@ public class ProjectService implements IProjectService {
     @Autowired
     IProjectRepository projectRepository;
 
+
     @Override
     public void createProject(Project project) {
         projectRepository.save(project);
@@ -30,6 +31,8 @@ public class ProjectService implements IProjectService {
         return projectRepository.findAll();
     }
 
+
+
     @Override
     public void updateProject(Long id, Project updatedProject) {
         Optional<Project> oldProject = projectRepository.findById(id);
@@ -38,5 +41,10 @@ public class ProjectService implements IProjectService {
             updatedProject.setId(oldProject.get().getId());
             projectRepository.save(updatedProject);
         }
+    }
+
+    @Override
+    public Project getProjectById (Long project_id) {
+        return projectRepository.findById(project_id).get();
     }
 }

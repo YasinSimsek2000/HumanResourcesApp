@@ -8,5 +8,7 @@ public interface IDepartmentService {
     void createDepartment(Department department);
     void deleteDepartment(Long id);
     List<Department> getDepartments();
+
+    Department getDepartmentById (Long department_id);
     void updateDepartment(Long id, Department department);
 }

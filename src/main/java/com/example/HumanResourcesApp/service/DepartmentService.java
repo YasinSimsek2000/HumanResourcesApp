@@ -2,6 +2,7 @@ package com.example.HumanResourcesApp.service;
 
 import com.example.HumanResourcesApp.entity.Department;
 import com.example.HumanResourcesApp.repository.IDepartmentRepository;
+import com.example.HumanResourcesApp.repository.IProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ public class DepartmentService implements IDepartmentService {
 
     @Autowired
     IDepartmentRepository departmentRepository;
+
+    public IDepartmentRepository getDepartmentRepository () { return this.departmentRepository;}
 
     @Override
     public void createDepartment(Department department) {
@@ -38,5 +41,10 @@ public class DepartmentService implements IDepartmentService {
             updatedDepartment.setId(oldDepartment.get().getId());
             departmentRepository.save(updatedDepartment);
         }
+    }
+
+    @Override
+    public Department getDepartmentById (Long department_id) {
+        return departmentRepository.findById(department_id).get();
     }
 }

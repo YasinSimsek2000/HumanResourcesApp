@@ -8,5 +8,8 @@ public interface IProjectService {
      void createProject(Project project);
      void deleteProject(Long id);
      List<Project> getProjects();
-     void updateProject(Long id, Project project);
+
+    Project getProjectById (Long project_id);
+
+    void updateProject(Long id, Project project);
 }
