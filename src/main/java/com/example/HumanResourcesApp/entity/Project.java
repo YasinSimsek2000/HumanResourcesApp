@@ -28,7 +28,7 @@ public class Project {
     private Employee head_of_project;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE)
-    @JsonManagedReference
+    @JsonManagedReference(value = "project-employees")
     private List<Employee> employees;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)

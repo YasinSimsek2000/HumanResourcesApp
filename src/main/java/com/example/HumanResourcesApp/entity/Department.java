@@ -25,12 +25,10 @@ public class Department {
     private String department_name;
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE)
-    @JsonManagedReference
+    @JsonManagedReference(value = "department-employees")
     private List<Employee> employee;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "departments" , fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Project> projects;
 }
-
-

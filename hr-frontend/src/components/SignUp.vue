@@ -123,7 +123,7 @@ export default {
               })
                   .then(function () {
                     alert('Account was created successfully!');
-                    window.location = '/mainPage';
+                    window.location = '/main-page';
                   })
                   .catch(function (error) {
                     console.log(error);

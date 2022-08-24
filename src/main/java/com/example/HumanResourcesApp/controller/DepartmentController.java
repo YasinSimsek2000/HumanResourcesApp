@@ -19,6 +19,11 @@ public class DepartmentController {
         return new ResponseEntity<>(departmentService.getDepartments(), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/getProjectsOfDepartment")
+    public ResponseEntity<Object> getProjectsOfDepartment(@RequestBody Long department_id) {
+        return new ResponseEntity<>(departmentService.getDepartmentById(department_id).getProjects(), HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/createDepartment", method = RequestMethod.POST)
     public ResponseEntity<Object> createDepartment (@RequestBody Department department) {
         departmentService.createDepartment(department);

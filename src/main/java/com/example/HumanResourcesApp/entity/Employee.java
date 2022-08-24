@@ -37,11 +37,11 @@ public class Employee {
     private String title;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonBackReference(value = "department-employees")
     private Department department;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonBackReference(value = "project-employees")
     private Project project;
 
     public String getEmail() {
