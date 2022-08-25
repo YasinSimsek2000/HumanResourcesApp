@@ -10,23 +10,23 @@
           width="100%"
           class="flex light-blue"
       >
-        <v-card-title height="250px">
+        <v-card-title  >
 
-          <v-icon>
-
-          </v-icon>
-          <strong class="subheading text-center">Get connected with us on social networks!</strong>
+          <img :src="iconLogo" class="logo" width="50px" height="50px">
+          <p class="subheading text-center" style="font-family: Calibre, serif; font-size: 30px; margin-left: 20px; margin-top: 15px"
+          >HUMAN RESOURCES APPLICATION</p>
 
           <v-spacer></v-spacer>
 
           <v-btn
-              v-for="icon in icons"
-              :key="icon"
+              v-for="(icon) in iconList"
+              :key="icon.icon"
+              @click="icon.onClick()"
               class="mx-4"
               icon
           >
             <v-icon size="24px" color="white">
-              {{ icon }}
+              {{ icon.icon }}
             </v-icon>
           </v-btn>
         </v-card-title>
@@ -38,17 +38,46 @@
 </template>
 
 <script>
+
+import logoImage from "@/components/HRlogo.png"
 export default {
 
   data () {
     return {
-      icons: [
-        'mdi-home',
-        'mdi-bell-outline',
-        'mdi-email',
-        'mdi-cog-outline',
-        'mdi-comment-question-outline'
+      iconList: [
+        {
+          icon: 'mdi-home',
+          onClick: () => {
+            window.location = "/main-page";
+          }
+        },
+        {
+          icon: 'mdi-bell-outline',
+          onClick: () => {
+            window.location = "/notification-page";
+          }
+        },
+        {
+          icon: 'mdi-email',
+          onClick: () => {
+            window.location = "/message-page";
+          }
+        },
+        {
+          icon: 'mdi-cog-outline',
+          onClick: () => {
+            window.location = "/settings-page";
+          }
+        },
+        {
+          icon: 'mdi-comment-question-outline',
+          onClick: () => {
+            window.location = "/support-page";
+          }
+        },
       ],
+
+      iconLogo: logoImage,
     }
   }
 }
