@@ -1,83 +1,85 @@
 <template>
   <v-card width="100%">
-    <v-footer
-      dark
-      padless
+    <v-app-bar
+        color="light-blue accent-4"
+        dense
+        dark
+        height="100px"
     >
-      <v-card
-          flat
-          tile
-          width="100%"
-          class="flex light-blue"
-      >
-        <v-card-title  >
 
-          <img :src="iconLogo" class="logo" width="50px" height="50px">
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
+        <v-toolbar-title  >
+
           <p class="subheading text-center" style="font-family: Calibre, serif; font-size: 30px; margin-left: 20px; margin-top: 15px"
           >HUMAN RESOURCES APPLICATION</p>
+        </v-toolbar-title>
 
-          <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
 
-          <v-btn
-              v-for="(icon) in iconList"
-              :key="icon.icon"
-              @click="icon.onClick()"
-              class="mx-4"
-              icon
-          >
-            <v-icon size="24px" color="white">
-              {{ icon.icon }}
-            </v-icon>
-          </v-btn>
-        </v-card-title>
+        <v-btn
+            v-for="(icon) in iconList"
+            :key="icon.icon"
+            @click="targetLink(icon.link)"
+            class="mx-4"
+            icon
+        >
+          <v-icon size="24px" color="white">
+            {{ icon.icon }}
+          </v-icon>
+        </v-btn>
 
-        <v-divider></v-divider>
-      </v-card>
-    </v-footer>
+    </v-app-bar>
   </v-card>
 </template>
 
 <script>
 
-import logoImage from "@/components/HRlogo.png"
 export default {
 
   data () {
     return {
+
+      icons : [
+        'mdi-home',
+        'mdi-bell-outline',
+        'mdi-email',
+        'mdi-cog-outline',
+        'mdi-comment-question-outline',
+      ],
+
       iconList: [
         {
           icon: 'mdi-home',
-          onClick: () => {
-            window.location = "/main-page";
-          }
+          link: "/main-page"
         },
+
         {
           icon: 'mdi-bell-outline',
-          onClick: () => {
-            window.location = "/notification-page";
-          }
+          link: "/notification-page"
         },
+
         {
           icon: 'mdi-email',
-          onClick: () => {
-            window.location = "/message-page";
-          }
+          link: "/message-page",
         },
+
         {
           icon: 'mdi-cog-outline',
-          onClick: () => {
-            window.location = "/settings-page";
-          }
+          link: "/settings-page"
         },
+
         {
           icon: 'mdi-comment-question-outline',
-          onClick: () => {
-            window.location = "/support-page";
-          }
+          link: "/support-page"
         },
       ],
+    }
+  },
 
-      iconLogo: logoImage,
+  methods : {
+    targetLink (link) {
+      window.location = link;
     }
   }
 }
