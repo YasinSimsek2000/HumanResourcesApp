@@ -1,5 +1,6 @@
 package com.example.HumanResourcesApp.service;
 
+import com.example.HumanResourcesApp.entity.Department;
 import com.example.HumanResourcesApp.entity.Employee;
 import com.example.HumanResourcesApp.repository.IEmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,10 @@ public class EmployeeService implements IEmployeeService{
     @Override
     public List<Employee> getEmployees() {
         return employeeRepository.findAll();
+    }
+
+    public Department getDepartmentOfEmployees(Long employee_id) {
+        return employeeRepository.findById(employee_id).get().getDepartment();
     }
 
     @Override

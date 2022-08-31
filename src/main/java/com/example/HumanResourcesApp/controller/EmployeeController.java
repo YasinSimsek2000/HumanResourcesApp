@@ -20,6 +20,11 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeService.getEmployees(), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/getDepartmentOfEmployee/{id}")
+    public ResponseEntity<Object> getDepartmentOfEmployees(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(employeeService.getDepartmentOfEmployees(id), HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/createEmployee", method = RequestMethod.POST)
     public ResponseEntity<Object> createEmployee(@RequestBody Employee employee) {
         employeeService.createEmployee(employee);

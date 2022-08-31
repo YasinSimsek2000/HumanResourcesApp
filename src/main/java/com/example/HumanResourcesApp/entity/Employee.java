@@ -27,12 +27,7 @@ public class Employee {
     private String marital_status;
     private String mobile;
     private String name;
-
-
-
-    @OneToOne
-    private Employee supervisor;
-
+    private Integer salary;
     private String surname;
     private String title;
 

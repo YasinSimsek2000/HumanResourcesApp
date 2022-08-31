@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,6 +24,8 @@ public class Project {
     @Id
     private Long id;
     private String project_name;
+    private Date startDate;
+    private Date endDate;
 
     @OneToOne
     private Employee head_of_project;

@@ -7,10 +7,7 @@
         height="100px"
     >
 
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
         <v-toolbar-title  >
-
           <p class="subheading text-center" style="font-family: Calibre, serif; font-size: 30px; margin-left: 20px; margin-top: 15px"
           >HUMAN RESOURCES APPLICATION</p>
         </v-toolbar-title>
@@ -51,27 +48,27 @@ export default {
       iconList: [
         {
           icon: 'mdi-home',
-          link: "/main-page"
+          link: "/home"
         },
 
         {
           icon: 'mdi-bell-outline',
-          link: "/notification-page"
+          link: "/notifications"
         },
 
         {
           icon: 'mdi-email',
-          link: "/message-page",
+          link: "/messages",
         },
 
         {
           icon: 'mdi-cog-outline',
-          link: "/settings-page"
+          link: "/settings"
         },
 
         {
           icon: 'mdi-comment-question-outline',
-          link: "/support-page"
+          link: "/support"
         },
       ],
     }

@@ -3,7 +3,9 @@ import VueRouter from 'vue-router'
 import LogInPage from "@/views/LogInPage";
 import SignUpPage from "@/views/SignUpPage";
 import ForgotPasswordPage from "@/views/ForgotPasswordPage";
-import MainPage from "@/views/MainPage";
+import HomePage from "@/views/HomePage";
+import DepartmentPage from "@/views/DepartmentPage"
+import EmployeePage from "@/views/EmployeePage";
 
 Vue.use(VueRouter)
 
@@ -27,9 +29,21 @@ const routes = [
   },
 
   {
-    path: "/main-page",
-    name: 'main-page',
-    component: MainPage
+    path: "/home",
+    name: 'home',
+    component: HomePage
+  },
+
+  {
+    path: "/departments",
+    name: 'departments',
+    component: DepartmentPage
+  },
+
+  {
+    path: "/employees",
+    name: 'employees',
+    component: EmployeePage
   },
 ]
 
