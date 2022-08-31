@@ -56,9 +56,6 @@ export default {
     }
   },
 
-  methods : {
-  },
-
   mounted() {
     axios.get('http://localhost:8080/getEmployees').then(response => {
       response.data.department = "";
