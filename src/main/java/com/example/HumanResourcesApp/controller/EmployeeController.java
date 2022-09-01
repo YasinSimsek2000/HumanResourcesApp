@@ -20,9 +20,19 @@ public class EmployeeController {
         return new ResponseEntity<>(employeeService.getEmployees(), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/getDepartmentOfEmployee")
+    public ResponseEntity<Object> getDepartmentOfEmployee(@RequestBody Long id) {
+        return new ResponseEntity<>(employeeService.getDepartmentOfEmployee(id), HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/getDepartmentOfEmployee/{id}")
-    public ResponseEntity<Object> getDepartmentOfEmployees(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(employeeService.getDepartmentOfEmployees(id), HttpStatus.OK);
+    public ResponseEntity<Object> getDepartmentOfEmployeeById(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(employeeService.getDepartmentOfEmployee(id), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getProjectOfEmployee/{id}")
+    public ResponseEntity<Object> getProjectOfEmployee(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(employeeService.getProjectOfEmployee(id), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/createEmployee", method = RequestMethod.POST)

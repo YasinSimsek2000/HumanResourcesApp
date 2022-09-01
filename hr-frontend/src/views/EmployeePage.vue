@@ -5,15 +5,24 @@
       <v-row style="min-height: 880px; width: 99%">
         <Navigation></Navigation>
         <v-col cols="10" >
-          <p class="subheading" style="font-family: Calibre, serif; font-size: 30px;margin-top: 15px"
-          >EMPLOYEES</p>
-
-          <v-data-table
-              :headers="headers"
-              :items="employees"
-              :items-per-page="10"
-              class="elevation-1"
-          ></v-data-table>
+          <v-card>
+            <v-card-title>
+              EMPLOYEES
+              <v-spacer></v-spacer>
+              <v-text-field
+                  v-model="search"
+                  append-icon="mdi-magnify"
+                  label="Search"
+                  single-line
+                  hide-details
+              ></v-text-field>
+            </v-card-title>
+            <v-data-table
+                :headers="headers"
+                :items="employees"
+                :search="search"
+            ></v-data-table>
+          </v-card>
 
         </v-col>
       </v-row>
@@ -38,6 +47,7 @@ export default {
 
   data () {
     return {
+      search: "",
       headers: [
         { text: 'ID', value: 'id', align: 'start'},
         { text: 'Name', value: 'name'},
@@ -50,23 +60,29 @@ export default {
         { text: 'Mobile', value: 'mobile' },
         { text: 'Salary', value: 'salary' },
         { text: 'Title', value: 'title'},
-        { text: 'Department', value: 'department'}
+        { text: 'Department', value: 'department'},
+        { text: 'Project', value: 'project'}
       ],
       employees: [],
     }
   },
 
-  mounted() {
+  methods : {
+    dateConverter (date) {
+      return date.substring(8,10) + "/" + date.substring(5,7) + "/" + date.substring(0,4);
+    }
+  },
+
+  created() {
     axios.get('http://localhost:8080/getEmployees').then(response => {
-      response.data.department = "";
       this.employees = response.data;
       for (let i = 0; i < this.employees.length; i++) {
-        let url = 'http://localhost:8080/getDepartmentOfEmployee/' + this.employees[i].id.toString();
-        axios.get(url).then(response1 => {
-          this.employees[i].department = response1.data.department_name;
-        });
+        let url_d = 'http://localhost:8080/getDepartmentOfEmployee/' + this.employees[i].id.toString();
+        let url_p = 'http://localhost:8080/getProjectOfEmployee/' + this.employees[i].id.toString();
+        axios.get(url_d).then(response1 => { this.employees[i].department = response1.data.department_name; });
+        axios.get(url_p).then(response2 => { this.employees[i].project = response2.data.project_name; });
         let date = this.employees[i].birth_date;
-        this.employees[i].birth_date = date.substring(8,10) + "/" + date.substring(5,7) + "/" + date.substring(0,4);
+        this.employees[i].birth_date = this.dateConverter(date);
       }
     });
   },

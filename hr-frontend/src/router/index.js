@@ -35,8 +35,8 @@ const routes = [
   },
 
   {
-    path: "/departments",
-    name: 'departments',
+    path: "/departments-projects",
+    name: 'departments-projects',
     component: DepartmentPage
   },
 

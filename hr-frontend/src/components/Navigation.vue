@@ -7,10 +7,8 @@
               <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
             </v-list-item-avatar>
             <v-list-item-content>
-              <v-list-item-title class="text-h6">
-                John Leider
-              </v-list-item-title>
-              <v-list-item-subtitle>john@vuetifyjs.com</v-list-item-subtitle>
+              <v-list-item-title class="text-h6" v-model="name_surname"> {{name_surname}}</v-list-item-title>
+              <v-list-item-subtitle v-model="mail"> {{mail}}</v-list-item-subtitle>
             </v-list-item-content>
 
             <v-list-item-action>
@@ -45,14 +43,17 @@
 </template>
 
 <script>
+
+import axios from "axios";
+
 export default {
   data () {
     return {
+      mail: "", name_surname: "",
       items: [
         { text: 'My Files', icon: 'mdi-folder', link: '/my-files'},
-        { text: 'Departments', icon: 'mdi-deskphone' , link: '/departments'},
+        { text: 'Departments and Projects', icon: 'mdi-apps' , link: '/departments-projects'},
         { text: 'Employees', icon: 'mdi-account-multiple' , link: '/employees'},
-        { text: 'Projects', icon: 'mdi-apps' , link: '/projects'},
         { text: 'Uploads', icon: 'mdi-upload' , link: '/my-files'},
         { text: 'Backups', icon: 'mdi-cloud-upload' , link: '/my-files'},
       ],
@@ -63,6 +64,14 @@ export default {
     targetLink (link) {
       window.location = link;
     }
+  },
+
+  created () {
+    axios.get('http://localhost:8080/getManagers').then(response => {
+      this.mail = response.data[0].email;
+      this.name_surname = response.data[0].name + " " + response.data[0].surname;
+      console.log(this.mail);
+    })
   }
 
 

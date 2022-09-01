@@ -2,6 +2,7 @@ package com.example.HumanResourcesApp.service;
 
 import com.example.HumanResourcesApp.entity.Department;
 import com.example.HumanResourcesApp.entity.Employee;
+import com.example.HumanResourcesApp.entity.Project;
 import com.example.HumanResourcesApp.repository.IEmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,8 +32,18 @@ public class EmployeeService implements IEmployeeService{
         return employeeRepository.findAll();
     }
 
-    public Department getDepartmentOfEmployees(Long employee_id) {
-        return employeeRepository.findById(employee_id).get().getDepartment();
+    public Department getDepartmentOfEmployee(Long employee_id) {
+        if(employeeRepository.findById(employee_id).isPresent()) {
+            return employeeRepository.findById(employee_id).get().getDepartment();
+        }
+        return null;
+    }
+
+    public Project getProjectOfEmployee(Long employee_id) {
+        if(employeeRepository.findById(employee_id).isPresent()) {
+            return employeeRepository.findById(employee_id).get().getProject();
+        }
+        return null;
     }
 
     @Override
