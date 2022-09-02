@@ -6,4 +6,3 @@ public interface IEmailService {
     String sendSimpleMail(EmailDetails details) throws Exception;
     String sendMailWithAttachment(EmailDetails details);
 }
-

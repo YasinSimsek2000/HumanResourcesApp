@@ -34,6 +34,9 @@ public class ManagerService implements IManagerService {
     public Optional<Manager> getManagerByMail(String email) { return managerRepository.findManagerByEmail(email); }
 
     @Override
+    public Optional<Manager> getManagerByID(Long id) { return managerRepository.findById(id); }
+
+    @Override
     public void updateManager(ManagerDto managerDto) {
         Optional<Manager> oldManager = managerRepository.findManagerByEmail(managerDto.getEmail());
 

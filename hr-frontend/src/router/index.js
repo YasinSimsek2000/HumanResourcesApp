@@ -6,6 +6,7 @@ import ForgotPasswordPage from "@/views/ForgotPasswordPage";
 import HomePage from "@/views/HomePage";
 import DepartmentPage from "@/views/DepartmentPage"
 import EmployeePage from "@/views/EmployeePage";
+import ManagerPage from "@/views/ManagerPage";
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,12 @@ const routes = [
     path: "/employees",
     name: 'employees',
     component: EmployeePage
+  },
+
+  {
+    path: "/manager",
+    name: 'manager',
+    component: ManagerPage
   },
 ]
 

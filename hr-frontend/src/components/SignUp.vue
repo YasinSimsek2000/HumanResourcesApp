@@ -58,9 +58,7 @@
               color="indigo"
               width="100%"
               @click="saveNewManager"
-          >
-            SIGN UP
-          </v-btn>
+          >SIGN UP</v-btn>
         </v-col>
       </v-row>
     </v-col>
@@ -73,7 +71,7 @@ import axios from "axios";
 export default {
 
   data () {
-    return { name : '', surname : '', email : '', newPassword : '',
+    return { name : '', surname : '', email : '', newPassword : '', image: "",
 
       rules0: [
         value => !!value || 'Required.',
@@ -93,7 +91,6 @@ export default {
 
   methods : {
 
-
     isDataValid() {
       let nameValid = this.name.length > 0;
       let surnameValid = this.surname.length > 0;
@@ -108,11 +105,12 @@ export default {
         email: this.email,
         name: this.name,
         password: this.newPassword,
-        surname: this.surname
+        surname: this.surname,
       }
 
+
       if (this.isDataValid()) {
-        axios.post('http://localhost:8080/createManager', manager )
+        axios.post('http://localhost:8080/createManager', manager)
             .then(function (response) {
               console.log(response);
               axios.post('http://localhost:8080/sendMail', {

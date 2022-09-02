@@ -16,5 +16,7 @@ public interface IManagerService {
 
     Optional<Manager> getManagerByMail(String email);
 
+    Optional<Manager> getManagerByID(Long id);
+
     void updateManager(ManagerDto manager);
 }

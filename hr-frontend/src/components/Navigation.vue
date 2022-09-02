@@ -6,14 +6,10 @@
             <v-list-item-avatar>
               <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
             </v-list-item-avatar>
-            <v-list-item-content>
+            <v-list-item-content @click="targetLink('/manager')">
               <v-list-item-title class="text-h6" v-model="name_surname"> {{name_surname}}</v-list-item-title>
               <v-list-item-subtitle v-model="mail"> {{mail}}</v-list-item-subtitle>
             </v-list-item-content>
-
-            <v-list-item-action>
-              <v-icon>mdi-menu-down</v-icon>
-            </v-list-item-action>
           </v-list-item>
         </v-list>
         <v-divider></v-divider>

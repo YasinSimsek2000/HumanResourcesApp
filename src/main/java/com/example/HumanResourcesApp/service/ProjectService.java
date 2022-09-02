@@ -31,8 +31,6 @@ public class ProjectService implements IProjectService {
         return projectRepository.findAll();
     }
 
-
-
     @Override
     public void updateProject(Long id, Project updatedProject) {
         Optional<Project> oldProject = projectRepository.findById(id);

@@ -1,5 +1,6 @@
 package com.example.HumanResourcesApp.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,27 +8,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.swing.*;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "manager")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Manager {
-
+public class ManagerFiles {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
-    private String surname;
-    private String email;
-    private String password;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "managerFiles")
+    private Manager manager;
 
-    @OneToMany(mappedBy = "manager", cascade = CascadeType.REMOVE)
-    @JsonManagedReference(value = "managerFiles")
-    private List<ManagerFiles> managerFiles;
+    private String fileType;
+    private String fileName;
+    private String filePath;
 }

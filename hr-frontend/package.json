@@ -9,10 +9,13 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "core-js": "^3.8.3",
     "vue": "^2.6.14",
     "vue-axios": "^3.4.1",
+    "vue-image-crop-upload": "^3.0.3",
+    "vue-picture-input": "^2.4.0",
     "vue-router": "^3.5.1",
     "vue-shadow-dom": "^1.6.0",
     "vuetify": "^2.6.0"
