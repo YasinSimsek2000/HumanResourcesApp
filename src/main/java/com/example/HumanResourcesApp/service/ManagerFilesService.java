@@ -19,9 +19,8 @@ public class ManagerFilesService implements IManagerFilesService{
     IManagerRepository managerRepository;
 
     @Override
-    public void createManagerFiles(Long managerID, ManagerFiles files) {
+    public void createManagerFiles(ManagerFiles files) {
         managerFilesRepository.save(files);
-        managerRepository.findById(managerID).get().getManagerFiles().add(files);
     }
 
     @Override

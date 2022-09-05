@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IManagerFilesService {
-    void createManagerFiles (Long managerID, ManagerFiles files);
+    void createManagerFiles (ManagerFiles files);
     void deleteManagerFiles (Long id);
     List<ManagerFiles> getManagerFiles ();
     void updateManagerFiles (Long id, ManagerFiles files);

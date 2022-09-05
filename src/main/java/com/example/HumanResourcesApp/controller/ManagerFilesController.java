@@ -9,9 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+
 
 @RestController
 @CrossOrigin("*")
@@ -27,11 +27,13 @@ public class ManagerFilesController {
             (@PathVariable("id") Long id, @RequestParam("file") MultipartFile file) throws IOException {
         String fileName = file.getOriginalFilename();
         String fileType = file.getContentType();
-        String filePath = "/" + managerService.getManagerByID(id).get().getName() +
-                " " + managerService.getManagerByID(id).get().getSurname();
-        file.transferTo(new File("C:\\Users\\ysimsek\\Documents\\"));
+        Path path = Path.of("C:\\Users\\ysimsek\\Documents\\yasin\\" + fileName);
+        String filePath = path.toString();
+        file.transferTo(path);
+        ManagerFiles managerFile = new ManagerFiles(managerService.getManagerByID(id).get(), fileType, fileName, filePath);
+        managerFilesService.createManagerFiles(managerFile);
+        return new ResponseEntity<> (managerService.getManagerByID(id), HttpStatus.OK);
 
-        return new ResponseEntity<> (file, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/deleteManagerFiles", method = RequestMethod.DELETE)

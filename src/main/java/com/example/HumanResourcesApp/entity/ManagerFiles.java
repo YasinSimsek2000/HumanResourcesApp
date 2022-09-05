@@ -15,6 +15,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ManagerFiles {
+
+    public ManagerFiles (Manager manager, String fileType, String fileName, String filePath) {
+        this.manager = manager;
+        this.fileType = fileType;
+        this.fileName = fileName;
+        this.filePath = filePath;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -22,7 +30,6 @@ public class ManagerFiles {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "managerFiles")
     private Manager manager;
-
     private String fileType;
     private String fileName;
     private String filePath;
