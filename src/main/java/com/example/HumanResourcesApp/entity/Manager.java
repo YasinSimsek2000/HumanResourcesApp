@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.swing.*;
 import java.util.List;
 
 @Entity
@@ -29,5 +28,5 @@ public class Manager {
 
     @OneToMany(mappedBy = "manager", cascade = CascadeType.REMOVE)
     @JsonManagedReference(value = "managerFiles")
-    private List<ManagerFiles> managerFiles;
+    private List<Files> files;
 }

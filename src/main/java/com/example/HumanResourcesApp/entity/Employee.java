@@ -1,12 +1,14 @@
 package com.example.HumanResourcesApp.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -38,6 +40,10 @@ public class Employee {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "project-employees")
     private Project project;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
+    @JsonManagedReference(value = "employeeFiles")
+    private List<Files> files;
 
     public String getEmail() {
         return email;

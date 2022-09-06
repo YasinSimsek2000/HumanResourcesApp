@@ -55,5 +55,10 @@ public class EmployeeService implements IEmployeeService{
             employeeRepository.save(updatedEmployee);
         }
     }
+
+    @Override
+    public Employee getEmployeeById (Long employee_id) {
+        return employeeRepository.findById(employee_id).get();
+    }
 }
 

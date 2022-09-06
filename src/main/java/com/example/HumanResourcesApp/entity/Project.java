@@ -41,4 +41,8 @@ public class Project {
             inverseJoinColumns = @JoinColumn(name = "department_id")
     )
     private List<Department> departments;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE)
+    @JsonManagedReference(value = "projectFiles")
+    private List<Files> files;
 }

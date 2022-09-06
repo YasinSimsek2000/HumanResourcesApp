@@ -1,7 +1,7 @@
 package com.example.HumanResourcesApp.entity;
 
+import com.example.HumanResourcesApp.service.EmployeeService;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,10 +14,9 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ManagerFiles {
+public class Files {
 
-    public ManagerFiles (Manager manager, String fileType, String fileName, String filePath) {
-        this.manager = manager;
+    public Files(String fileType, String fileName, String filePath) {
         this.fileType = fileType;
         this.fileName = fileName;
         this.filePath = filePath;
@@ -28,8 +27,20 @@ public class ManagerFiles {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "departmentFiles")
+    private Department department;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "employeeFiles")
+    private Employee employee;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "managerFiles")
     private Manager manager;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "projectFiles")
+    private Project project;
     private String fileType;
     private String fileName;
     private String filePath;

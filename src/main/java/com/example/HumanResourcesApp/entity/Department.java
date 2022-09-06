@@ -31,4 +31,8 @@ public class Department {
     @JsonIgnore
     @ManyToMany(mappedBy = "departments" , fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Project> projects;
+
+    @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE)
+    @JsonManagedReference(value = "departmentFiles")
+    private List<Files> files;
 }
