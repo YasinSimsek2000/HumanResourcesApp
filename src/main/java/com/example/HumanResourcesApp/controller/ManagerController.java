@@ -9,6 +9,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 @RestController
@@ -16,6 +20,9 @@ import java.util.Objects;
 public class ManagerController {
     @Autowired
     ManagerService managerService;
+
+    @Autowired
+    FilesController filesController;
 
     @RequestMapping(value = "/checkManager", method = RequestMethod.POST)
     public void checkManager (@RequestBody ManagerDto managerDto) throws Exception {
@@ -36,6 +43,15 @@ public class ManagerController {
 
         else {
             managerService.createManager(manager);
+            try {
+                File profilePhoto = new File("C:\\Users\\ysimsek\\Documents\\ProfilePhoto.png");
+                Files.copy(Paths.get("C:\\Users\\ysimsek\\Downloads\\HumanResourcesApp" +
+                                "\\HumanResourcesApp\\Human Resources Application Files\\ProfilePhoto.png"),
+                        Paths.get("C:\\Users\\ysimsek\\Downloads\\HumanResourcesApp" +
+                                "\\HumanResourcesApp\\Human Resources Application Files\\Managers\\" +
+                                manager.getId() + " - " + manager.getName() + " " + manager.getSurname() + "\\ProfilePhoto.png"));
+            } catch (FileAlreadyExistsException ignored){}
+
             return new ResponseEntity<>(manager, HttpStatus.CREATED);
         }
     }
@@ -54,6 +70,11 @@ public class ManagerController {
     @RequestMapping(value = "/getManagerByMail", method = RequestMethod.GET)
     public ResponseEntity<Object> getManagerByMail (@RequestBody String email) {
         return new ResponseEntity<>(managerService.getManagerByMail(email), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/getManagerFilesByMail/{email}", method = RequestMethod.GET)
+    public ResponseEntity<Object> getManagerFilesByMail (@PathVariable("email") String email) {
+        return new ResponseEntity<>(managerService.getManagerByMail(email).get().getFiles(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/updateManager", method = RequestMethod.PUT)

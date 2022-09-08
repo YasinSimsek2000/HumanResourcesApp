@@ -1,12 +1,16 @@
 package com.example.HumanResourcesApp.controller;
 
+import com.example.HumanResourcesApp.entity.Employee;
 import com.example.HumanResourcesApp.entity.Files;
+import com.example.HumanResourcesApp.entity.Manager;
 import com.example.HumanResourcesApp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -29,7 +33,7 @@ public class FilesController {
              @RequestParam("file") MultipartFile file) throws Exception {
         String fileName = file.getOriginalFilename();
         String fileType = file.getContentType();
-        Path path = Path.of("C:\\Users\\ysimsek\\Documents\\yasin\\" + fileName);
+        Path path = findPath(Class, ID, fileName);
         String filePath = path.toString();
         file.transferTo(path);
         Files newFile = new Files(fileType, fileName, filePath);
@@ -63,5 +67,49 @@ public class FilesController {
         }
 
         filesService.createFiles(newFile);
+    }
+
+    private Path findPath (String Class, Long ID, String fileName) throws Exception {
+        String path = "C:\\Users\\ysimsek\\Downloads\\HumanResourcesApp\\" +
+                "HumanResourcesApp\\Human Resources Application Files\\";
+        String path2 = "\\";
+
+        switch (Class) {
+            case "Department" -> {
+                path += "Departments";
+                path2 += ID + " - " + departmentService.getDepartmentById(ID).getDepartment_name();
+            }
+            case "Employee" -> {
+                Employee employee = employeeService.getEmployeeById(ID);
+                path += "Employees";
+                path2 += ID + " - " + employee.getName() + " " + employee.getSurname();
+            }
+            case "Manager" -> {
+                Manager manager = managerService.getManagerByID(ID).get();
+                path += "Managers";
+                path2 += ID + " - " + manager.getName() + " " + manager.getSurname();
+            }
+            case "Project" -> {
+                path += "Projects";
+                path2 += ID + " - " + projectService.getProjectById(ID).getProject_name();
+            }
+            default -> throw new Exception("Invalid try");
+        };
+
+        File file = new File(path);
+        if (!file.exists()) {
+            if (file.mkdir()) { System.out.println("File is created successfully."); }
+            else { System.out.println("File is not created. Check the problem."); }
+        }
+
+        path += path2;
+
+        file = new File(path);
+        if (!file.exists()) {
+            if (file.mkdir()) { System.out.println("File is created successfully."); }
+            else { System.out.println("File is not created. Check the problem."); }
+        }
+
+        return Path.of(path + "\\" + fileName);
     }
 }

@@ -7,7 +7,7 @@
         <v-col cols="10">
           <v-row>
             <v-col cols="6">
-              <v-img></v-img>
+              <v-img style="height: 300px; width: 300px;" :src="image"></v-img>
             </v-col>
 
             <v-col cols="6">
@@ -36,13 +36,16 @@ export default {
   name: 'manager-page',
   components : {
     Footer,
-    Navigation
+    Navigation,
   },
 
   data () {
     return {
+      image: ""
     }
   },
+
+
 };
 </script>
 

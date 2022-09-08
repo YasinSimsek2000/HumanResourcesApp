@@ -1,0 +1,32 @@
+spring  && spring boot nedir?
+
+dependency injection 
+dependency inversion
+ioc container
+inversion of control
+
+rest nedir?
+
+REST API
+-GET
+-POST
+-DELETE
+-PUT
+
+hibernate (Orm toolları) database için
+
+maven nedir?
+
+json 
+jpa
+
+MVC Pattern (Model - View - Controller)
+
+N-tier Architecture N=3
+
+Presentation
+Business layer
+Data layer
+
+Hibernate Orm
+Token yapısı

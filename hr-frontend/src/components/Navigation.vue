@@ -4,7 +4,7 @@
         <v-list>
           <v-list-item link>
             <v-list-item-avatar>
-              <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+              <v-img :src="image"></v-img>
             </v-list-item-avatar>
             <v-list-item-content @click="targetLink('/manager')">
               <v-list-item-title class="text-h6" v-model="name_surname"> {{name_surname}}</v-list-item-title>
@@ -45,7 +45,7 @@ import axios from "axios";
 export default {
   data () {
     return {
-      mail: "", name_surname: "",
+      mail: "", name_surname: "", image: "../../Human Resources Application Files/Managers/",
       items: [
         { text: 'My Files', icon: 'mdi-folder', link: '/my-files'},
         { text: 'Departments and Projects', icon: 'mdi-apps' , link: '/departments-projects'},
@@ -66,15 +66,10 @@ export default {
     axios.get('http://localhost:8080/getManagers').then(response => {
       this.mail = response.data[0].email;
       this.name_surname = response.data[0].name + " " + response.data[0].surname;
-      console.log(this.mail);
-    })
+      this.image += response.data[0].id + " - " + this.name_surname + "/ProfilePhoto.png";
+      console.log(this.image);
+    });
   }
-
 
 }
 </script>
-
-<style>
-
-</style>
-
