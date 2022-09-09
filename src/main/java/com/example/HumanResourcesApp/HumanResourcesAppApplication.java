@@ -14,7 +14,7 @@ public class HumanResourcesAppApplication {
 	public static void main(String[] args) throws IOException {
 
 		File file = new File("C:\\Users\\ysimsek\\Downloads\\HumanResourcesApp" +
-				"\\HumanResourcesApp\\Human Resources Application Files");
+				"\\HumanResourcesApp\\Human_Resources_Application_Files");
 		if (!file.exists()) {
 			if (file.mkdir()) { System.out.println("File is created successfully."); }
 			else { System.out.println("File is not created. Check the problem."); }

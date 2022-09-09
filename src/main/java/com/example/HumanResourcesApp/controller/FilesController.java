@@ -71,27 +71,27 @@ public class FilesController {
 
     private Path findPath (String Class, Long ID, String fileName) throws Exception {
         String path = "C:\\Users\\ysimsek\\Downloads\\HumanResourcesApp\\" +
-                "HumanResourcesApp\\Human Resources Application Files\\";
+                "HumanResourcesApp\\Human_Resources_Application_Files\\";
         String path2 = "\\";
 
         switch (Class) {
             case "Department" -> {
                 path += "Departments";
-                path2 += ID + " - " + departmentService.getDepartmentById(ID).getDepartment_name();
+                path2 += ID + "_" + departmentService.getDepartmentById(ID).getDepartment_name();
             }
             case "Employee" -> {
                 Employee employee = employeeService.getEmployeeById(ID);
                 path += "Employees";
-                path2 += ID + " - " + employee.getName() + " " + employee.getSurname();
+                path2 += ID + "_" + employee.getName() + "_" + employee.getSurname();
             }
             case "Manager" -> {
                 Manager manager = managerService.getManagerByID(ID).get();
                 path += "Managers";
-                path2 += ID + " - " + manager.getName() + " " + manager.getSurname();
+                path2 += ID + "_" + manager.getName() + "_" + manager.getSurname();
             }
             case "Project" -> {
                 path += "Projects";
-                path2 += ID + " - " + projectService.getProjectById(ID).getProject_name();
+                path2 += ID + "_" + projectService.getProjectById(ID).getProject_name();
             }
             default -> throw new Exception("Invalid try");
         };

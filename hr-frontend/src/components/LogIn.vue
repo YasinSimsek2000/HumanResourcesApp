@@ -95,7 +95,7 @@ export default {
         axios.post('http://localhost:8080/checkManager', manager)
             .then(function (response) {
               console.log(response);
-              window.location = '/home';
+              window.location = '/employees';
             })
 
             .catch(function (error) {
