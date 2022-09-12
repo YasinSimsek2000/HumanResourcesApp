@@ -121,7 +121,7 @@ export default {
               })
                   .then(function () {
                     alert('Account was created successfully!');
-                    window.location = '/employees';
+                    window.location = '/home';
                   })
                   .catch(function (error) {
                     console.log(error);

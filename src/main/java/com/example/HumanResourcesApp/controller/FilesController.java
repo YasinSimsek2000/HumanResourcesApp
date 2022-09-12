@@ -7,12 +7,13 @@ import com.example.HumanResourcesApp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 @RestController
 @CrossOrigin("*")
@@ -39,6 +40,16 @@ public class FilesController {
         Files newFile = new Files(fileType, fileName, filePath);
         saveFile(Class, ID, newFile);
         return new ResponseEntity<> (newFile.getFileName(), HttpStatus.OK);
+    }
+    public void createNewFile ( Long ID, String Class, File file) throws Exception {
+        String fileName = file.getName();
+        String fileType = fileName.substring(fileName.lastIndexOf(".") + 1);
+        Path path = findPath(Class, ID, fileName);
+        String filePath = path.toString();
+        java.nio.file.Files.copy(file.toPath(), Path.of(filePath),
+                StandardCopyOption.REPLACE_EXISTING);
+        Files newFile = new Files(fileType, fileName, filePath);
+        saveFile(Class, ID, newFile);
     }
 
     @RequestMapping(value = "/deleteFiles", method = RequestMethod.DELETE, produces={"application/json; charset=UTF-8"})

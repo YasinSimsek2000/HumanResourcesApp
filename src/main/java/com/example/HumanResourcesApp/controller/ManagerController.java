@@ -5,13 +5,12 @@ import com.example.HumanResourcesApp.entity.Manager;
 import com.example.HumanResourcesApp.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
-import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
@@ -43,15 +42,10 @@ public class ManagerController {
 
         else {
             managerService.createManager(manager);
-            try {
-                File profilePhoto = new File("C:\\Users\\ysimsek\\Documents\\ProfilePhoto.png");
-                Files.copy(Paths.get("C:\\Users\\ysimsek\\Downloads\\HumanResourcesApp" +
-                                "\\HumanResourcesApp\\Human Resources Application Files\\ProfilePhoto.png"),
-                        Paths.get("C:\\Users\\ysimsek\\Downloads\\HumanResourcesApp" +
-                                "\\HumanResourcesApp\\Human Resources Application Files\\Managers\\" +
-                                manager.getId() + " - " + manager.getName() + " " + manager.getSurname() + "\\ProfilePhoto.png"));
-            } catch (FileAlreadyExistsException ignored){}
-
+            String path = "hr-frontend\\src\\assets\\ProfilePhoto.png";
+            File file = new File(path);
+            System.out.println(file.exists());
+            filesController.createNewFile(manager.getId(), "Manager", file);
             return new ResponseEntity<>(manager, HttpStatus.CREATED);
         }
     }

@@ -29,7 +29,6 @@ public class Files {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "departmentFiles")
     private Department department;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "employeeFiles")
     private Employee employee;
