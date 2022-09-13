@@ -45,8 +45,7 @@ import axios from "axios";
 export default {
   data () {
     return {
-      mail: "", name_surname: "",
-      image: "../../../Human_Resources_Application_Files/Managers/1_Yasin_Şimşek/ProfilePhoto.png",
+      mail: "", name_surname: "", image: require("../../../Human_Resources_Application_Files/Managers/1_Yasin_Şimşek/ProfilePhoto.png"),
       items: [
         { text: 'My Files', icon: 'mdi-folder', link: '/my-files'},
         { text: 'Departments and Projects', icon: 'mdi-apps' , link: '/departments-projects'},
@@ -60,13 +59,20 @@ export default {
   methods : {
     targetLink (link) {
       window.location = link;
-    }
+    },
+
+    getImage (response) {
+      let imagePath =  '../../../Human_Resources_Application_Files/Managers/' + response.data[0].id + '_' +
+            response.data[0].name + '_' + response.data[0].surname + '/ProfilePhoto.png';
+      this.image = require(imagePath);
+    },
   },
 
   created () {
     axios.get('http://localhost:8080/getManagers').then(response => {
       this.mail = response.data[0].email;
       this.name_surname = response.data[0].name + " " + response.data[0].surname;
+      this.getImage(response);
     });
   }
 }
