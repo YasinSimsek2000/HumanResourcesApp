@@ -9,9 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Objects;
 
 @RestController
@@ -76,6 +73,4 @@ public class ManagerController {
         managerService.updateManager(managerdto);
         return new ResponseEntity<>(managerdto, HttpStatus.OK);
     }
-
-
 }

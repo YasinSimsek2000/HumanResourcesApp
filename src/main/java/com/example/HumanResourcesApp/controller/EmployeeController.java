@@ -52,4 +52,9 @@ public class EmployeeController {
         employeeService.updateEmployee(employee.getId(), employee);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/getNotificationsOfEmployee/{id}")
+    public ResponseEntity<Object> getNotificationsOfEmployee(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(employeeService.getNotificationsOfEmployee(id), HttpStatus.OK);
+    }
 }

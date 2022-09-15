@@ -45,6 +45,14 @@ public class Employee {
     @JsonManagedReference(value = "employeeFiles")
     private List<Files> files;
 
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "employees_notifications",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "notification_id")
+    )
+    private List<Notification> notifications;
+
     public String getEmail() {
         return email;
     }

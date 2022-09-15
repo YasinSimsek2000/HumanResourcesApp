@@ -10,16 +10,7 @@
               <v-img style="height: 300px; width: 300px;" :src="image"></v-img>
             </v-col>
 
-            <v-col cols="6">
-              <h2></h2>
-              <h3></h3>
-              <h3></h3>
-            </v-col>
-          </v-row>
 
-          <v-row>
-            <h3></h3>
-            CHANGE PASSWORD SECTION
           </v-row>
         </v-col>
       </v-row>
@@ -41,10 +32,13 @@ export default {
 
   data () {
     return {
-      image: ""
+      image: "", items: [],
     }
   },
 
+  created() {
+
+  }
 
 };
 </script>

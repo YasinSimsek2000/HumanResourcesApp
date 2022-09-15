@@ -4,7 +4,7 @@
         <v-list>
           <v-list-item link>
             <v-list-item-avatar>
-              <v-img :src="image"></v-img>
+              <v-img :src="require('../../../Human_Resources_Application_Files/Managers/'+ image)"></v-img>
             </v-list-item-avatar>
             <v-list-item-content @click="targetLink('/manager')">
               <v-list-item-title class="text-h6" v-model="name_surname"> {{name_surname}}</v-list-item-title>
@@ -45,7 +45,8 @@ import axios from "axios";
 export default {
   data () {
     return {
-      mail: "", name_surname: "", image: require("../../../Human_Resources_Application_Files/Managers/1_Yasin_Şimşek/ProfilePhoto.png"),
+      mail: "", name_surname: "", image: '1_Yasin_Şimşek/ProfilePhoto.png',
+
       items: [
         { text: 'My Files', icon: 'mdi-folder', link: '/my-files'},
         { text: 'Departments and Projects', icon: 'mdi-apps' , link: '/departments-projects'},
@@ -62,9 +63,9 @@ export default {
     },
 
     getImage (response) {
-      let imagePath =  '../../../Human_Resources_Application_Files/Managers/' + response.data[0].id + '_' +
+      this.image = response.data[0].id + '_' +
             response.data[0].name + '_' + response.data[0].surname + '/ProfilePhoto.png';
-      this.image = require(imagePath);
+      console.log(this.image);
     },
   },
 

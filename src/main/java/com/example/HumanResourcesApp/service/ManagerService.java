@@ -2,10 +2,12 @@ package com.example.HumanResourcesApp.service;
 
 import com.example.HumanResourcesApp.dto.ManagerDto;
 import com.example.HumanResourcesApp.entity.Manager;
+import com.example.HumanResourcesApp.entity.Notification;
 import com.example.HumanResourcesApp.repository.IManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +16,11 @@ public class ManagerService implements IManagerService {
 
     @Autowired
     IManagerRepository managerRepository;
+
+    @Autowired
+    EmployeeService employeeService;
+
+    Subject subject = new Subject();
 
     @Override
     public void createManager(Manager manager) {
@@ -44,6 +51,16 @@ public class ManagerService implements IManagerService {
             oldManager.get().setPassword(hashPassword(managerDto.getPassword()));
             managerRepository.save(oldManager.get());
         }
+    }
+
+    public void sendNotificationToAllEmployees (Notification notification)  {
+        subject.setNotification(notification);
+        subject.notifyAllObservers(employeeService);
+    }
+
+    public void sendNotificationToEmployees (Notification notification, ArrayList<Long> employeeList)  {
+        subject.setNotification(notification);
+        subject.notifyAllObservers(employeeService, employeeList);
     }
 
     public String hashPassword (String password) {

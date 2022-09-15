@@ -1,6 +1,5 @@
 package com.example.HumanResourcesApp.entity;
 
-import com.example.HumanResourcesApp.service.EmployeeService;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
