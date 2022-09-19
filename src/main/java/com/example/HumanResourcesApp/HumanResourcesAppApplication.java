@@ -1,17 +1,12 @@
 package com.example.HumanResourcesApp;
 
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 @SpringBootApplication
 public class HumanResourcesAppApplication {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		String path = "C:\\Users\\ysimsek\\Downloads\\HumanResourcesApp" +
 				"\\HumanResourcesApp\\Human_Resources_Application_Files";
 		File file = new File(path);

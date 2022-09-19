@@ -14,10 +14,13 @@ public class ProjectService implements IProjectService {
     @Autowired
     IProjectRepository projectRepository;
 
+    @Autowired
+    FilesService filesService;
 
     @Override
-    public void createProject(Project project) {
+    public void createProject(Project project) throws Exception {
         projectRepository.save(project);
+        filesService.findPath("Project", project.getId(), null);
     }
 
     @Override
@@ -43,6 +46,10 @@ public class ProjectService implements IProjectService {
 
     @Override
     public Project getProjectById (Long project_id) {
-        return projectRepository.findById(project_id).get();
+        if (projectRepository.findById(project_id).isPresent()) {
+            return projectRepository.findById(project_id).get();
+        }
+
+        else { return null; }
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface IDepartmentService {
 
-    void createDepartment(Department department);
+    void createDepartment(Department department) throws Exception;
     void deleteDepartment(Long id);
     List<Department> getDepartments();
 

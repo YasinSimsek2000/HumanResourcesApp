@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.io.File;
 import java.util.Objects;
 
 @RestController
@@ -16,9 +14,6 @@ import java.util.Objects;
 public class ManagerController {
     @Autowired
     ManagerService managerService;
-
-    @Autowired
-    FilesController filesController;
 
     @RequestMapping(value = "/checkManager", method = RequestMethod.POST)
     public void checkManager (@RequestBody ManagerDto managerDto) throws Exception {
@@ -39,10 +34,6 @@ public class ManagerController {
 
         else {
             managerService.createManager(manager);
-            String path = "hr-frontend\\src\\assets\\ProfilePhoto.png";
-            File file = new File(path);
-            System.out.println(file.exists());
-            filesController.createNewFile(manager.getId(), "Manager", file);
             return new ResponseEntity<>(manager, HttpStatus.CREATED);
         }
     }
@@ -65,7 +56,11 @@ public class ManagerController {
 
     @RequestMapping(value = "/getManagerFilesByMail/{email}", method = RequestMethod.GET)
     public ResponseEntity<Object> getManagerFilesByMail (@PathVariable("email") String email) {
-        return new ResponseEntity<>(managerService.getManagerByMail(email).get().getFiles(), HttpStatus.OK);
+        if (managerService.getManagerByMail(email).isPresent()) {
+            return new ResponseEntity<>(managerService.getManagerByMail(email).get().getFiles(), HttpStatus.OK);
+        }
+
+        else { return null; }
     }
 
     @RequestMapping(value = "/updateManager", method = RequestMethod.PUT)

@@ -2,12 +2,11 @@ package com.example.HumanResourcesApp.service;
 
 import com.example.HumanResourcesApp.dto.ManagerDto;
 import com.example.HumanResourcesApp.entity.Manager;
-import com.example.HumanResourcesApp.entity.Notification;
 import com.example.HumanResourcesApp.repository.IManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,14 +17,17 @@ public class ManagerService implements IManagerService {
     IManagerRepository managerRepository;
 
     @Autowired
-    EmployeeService employeeService;
+    FilesService filesService;
 
-    Subject subject = new Subject();
 
     @Override
-    public void createManager(Manager manager) {
+    public void createManager(Manager manager) throws Exception {
         manager.setPassword(hashPassword(manager.getPassword()));
         managerRepository.save(manager);
+        String path = "hr-frontend\\src\\assets\\ProfilePhoto.png";
+        File file = new File(path);
+        System.out.println(file.exists());
+        filesService.createFile(manager.getId(), "Manager", file);
     }
 
     @Override
@@ -53,25 +55,15 @@ public class ManagerService implements IManagerService {
         }
     }
 
-    public void sendNotificationToAllEmployees (Notification notification)  {
-        subject.setNotification(notification);
-        subject.notifyAllObservers(employeeService);
-    }
-
-    public void sendNotificationToEmployees (Notification notification, ArrayList<Long> employeeList)  {
-        subject.setNotification(notification);
-        subject.notifyAllObservers(employeeService, employeeList);
-    }
-
     public String hashPassword (String password) {
-        String newPassword = "";
+        StringBuilder newPassword = new StringBuilder();
 
         for (int x = 0; x < password.length(); x++) {
             int newChar = password.charAt(x);
             int code = (newChar + 30 % 127 < 33) ? newChar - 30 : newChar + 30;
-            newPassword += (char)code;
+            newPassword.append((char) code);
         }
 
-        return newPassword;
+        return newPassword.toString();
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface IProjectService {
 
-     void createProject(Project project);
+     void createProject(Project project) throws Exception;
      void deleteProject(Long id);
      List<Project> getProjects();
 

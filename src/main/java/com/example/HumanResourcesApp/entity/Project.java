@@ -1,6 +1,5 @@
 package com.example.HumanResourcesApp.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -22,6 +19,8 @@ import java.util.Set;
 public class Project {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long id;
     private String project_name;
     private Date startDate;

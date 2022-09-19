@@ -5,7 +5,6 @@ import com.example.HumanResourcesApp.entity.Employee;
 import com.example.HumanResourcesApp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +35,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/createEmployee", method = RequestMethod.POST)
-    public ResponseEntity<Object> createEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<Object> createEmployee(@RequestBody Employee employee) throws Exception {
         employeeService.createEmployee(employee);
         return new ResponseEntity<>(employee, HttpStatus.CREATED);
     }
@@ -51,10 +50,5 @@ public class EmployeeController {
     public ResponseEntity<Object> updateEmployee(@RequestBody Employee employee) {
         employeeService.updateEmployee(employee.getId(), employee);
         return new ResponseEntity<>(employee, HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/getNotificationsOfEmployee/{id}")
-    public ResponseEntity<Object> getNotificationsOfEmployee(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(employeeService.getNotificationsOfEmployee(id), HttpStatus.OK);
     }
 }

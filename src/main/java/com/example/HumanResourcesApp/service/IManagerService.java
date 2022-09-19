@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface IManagerService {
 
-    void createManager(Manager manager);
+    void createManager(Manager manager) throws Exception;
 
     void deleteManager(Long id);
 

@@ -20,7 +20,7 @@ public class ProjectController {
     DepartmentService departmentService;
 
     @RequestMapping(value = "/createProject", method = RequestMethod.POST)
-    public ResponseEntity<Object> createProject (@RequestBody Project project) {
+    public ResponseEntity<Object> createProject (@RequestBody Project project) throws Exception {
         projectService.createProject(project);
         return new ResponseEntity<>(project, HttpStatus.CREATED);
     }
@@ -44,7 +44,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/enrollProject", method = RequestMethod.PUT)
-    public ResponseEntity<Object> enrollDepartmentToProject( @RequestBody Long[] ids) {
+    public ResponseEntity<Object> enrollDepartmentToProject( @RequestBody Long[] ids) throws Exception {
         Long project_id = ids[0];
         Long department_id = ids[1];
         Project project = projectService.getProjectById(project_id);
