@@ -92,6 +92,7 @@ export default {
       }
 
       if (this.isDataValid()) {
+
         axios.post('http://localhost:8080/checkManager', manager)
             .then(function (response) {
               console.log(response);

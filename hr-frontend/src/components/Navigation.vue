@@ -45,7 +45,7 @@ import axios from "axios";
 export default {
   data () {
     return {
-      mail: "", name_surname: "", image: '1_Yasin_Şimşek/ProfilePhoto.png',
+      mail: "", name_surname: "", image: '1_SILVER_TECHNOLOGY/ProfilePhoto.png',
 
       items: [
         { text: 'My Files', icon: 'mdi-folder', link: '/my-files'},
@@ -63,16 +63,17 @@ export default {
     },
 
     getImage (response) {
-      this.image = response.data[0].id + '_' +
-            response.data[0].name + '_' + response.data[0].surname + '/ProfilePhoto.png';
+      this.image = response.data[0] + '_' +
+            response.data[2] + '_' + response.data[3] + '/ProfilePhoto.png';
       console.log(this.image);
+      console.log(response);
     },
   },
 
   created () {
-    axios.get('http://localhost:8080/getManagers').then(response => {
-      this.mail = response.data[0].email;
-      this.name_surname = response.data[0].name + " " + response.data[0].surname;
+    axios.get('http://localhost:8080/getCurrentUser').then(response => {
+      this.mail = response.data[1];
+      this.name_surname = response.data[2] + " " + response.data[3];
       this.getImage(response);
     });
   }

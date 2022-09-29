@@ -28,7 +28,7 @@ public class FilesService implements IFilesService {
     @Autowired
     ProjectService projectService;
 
-    public void createFile (Long ID, String Class, MultipartFile file) throws Exception {
+    public void createMultipartFile (Long ID, String Class, MultipartFile file) throws Exception {
         String fileName = file.getOriginalFilename();
         String fileType = file.getContentType();
         Path path = findPath(Class, ID, fileName);

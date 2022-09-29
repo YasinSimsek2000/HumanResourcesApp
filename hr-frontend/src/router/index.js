@@ -7,6 +7,7 @@ import HomePage from "@/views/HomePage";
 import DepartmentPage from "@/views/DepartmentPage"
 import EmployeePage from "@/views/EmployeePage";
 import ManagerPage from "@/views/ManagerPage";
+import NotificationPage from "@/views/NotificationPage";
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,12 @@ const routes = [
     path: "/manager",
     name: 'manager',
     component: ManagerPage
+  },
+
+  {
+    path: "/notifications",
+    name: 'notifications',
+    component: NotificationPage
   },
 ]
 

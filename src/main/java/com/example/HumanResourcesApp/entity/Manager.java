@@ -29,4 +29,8 @@ public class Manager {
     @OneToMany(mappedBy = "manager", cascade = CascadeType.REMOVE)
     @JsonManagedReference(value = "managerFiles")
     private List<Files> files;
+
+    @OneToMany(mappedBy = "manager", cascade = CascadeType.REMOVE)
+    @JsonManagedReference(value = "manager-notification")
+    private List<Notification> notification;
 }

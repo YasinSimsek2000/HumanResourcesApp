@@ -24,7 +24,7 @@ public class FilesController {
     @RequestMapping(value = "/createNewFile/{Class}/{ID}", method = RequestMethod.POST)
     public void createFile (@PathVariable("ID") Long ID, @PathVariable("Class") String Class,
              @RequestParam("file") MultipartFile file) throws Exception {
-        filesService.createFile(ID, Class, file);
+        filesService.createMultipartFile(ID, Class, file);
     }
 
     @RequestMapping(value = "/deleteFiles", method = RequestMethod.DELETE, produces={"application/json; charset=UTF-8"})

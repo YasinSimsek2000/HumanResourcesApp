@@ -7,7 +7,7 @@ import java.io.File;
 import java.util.List;
 
 public interface IFilesService {
-    void createFile (Long ID, String Class, MultipartFile file) throws Exception;
+    void createMultipartFile (Long ID, String Class, MultipartFile file) throws Exception;
     void createFile (Long ID, String Class, File file) throws Exception;
     void deleteFiles (String fileName);
     List<Files> getFiles ();

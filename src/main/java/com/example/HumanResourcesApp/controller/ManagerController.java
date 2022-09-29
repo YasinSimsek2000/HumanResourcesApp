@@ -7,6 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Objects;
 
 @RestController
@@ -24,6 +29,45 @@ public class ManagerController {
         else if (!Objects.equals(managerService.hashPassword(managerDto.getPassword()), managerService.getManagerByMail(managerDto.getEmail()).get().getPassword())) {
             throw new Exception("Wrong password!");
         }
+
+        else {
+            try {
+                FileWriter writer = new FileWriter("currentUser.txt");
+                BufferedWriter write = new BufferedWriter(writer);
+
+                Manager manager = managerService.getManagerByMail(managerDto.getEmail()).get();
+                write.write(manager.getId() + "\n");
+                write.write(manager.getEmail() + "\n");
+                write.write(manager.getName() + "\n");
+                write.write(manager.getSurname());
+
+                write.close();
+                writer.close();
+            } catch (Exception ignored) {}
+        }
+    }
+
+    @RequestMapping(value = "/getCurrentUser", method = RequestMethod.GET)
+    public ResponseEntity<Object> getCurrentUser () {
+        try {
+            FileReader reader = new FileReader("currentUser.txt");
+            BufferedReader read = new BufferedReader(reader);
+
+            String line = read.readLine();
+            String[] data = new String[4];
+            int x = 0;
+
+            while (line != null) {
+                data[x++] = line;
+                line = read.readLine();
+            }
+
+            read.close();
+            reader.close();
+
+            System.out.println(data);
+            return new ResponseEntity<>(data, HttpStatus.OK);
+        } catch (Exception ignored) {return null;}
     }
 
     @RequestMapping(value = "/createManager", method = RequestMethod.POST)
