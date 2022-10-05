@@ -7,8 +7,8 @@ import java.io.File;
 @SpringBootApplication
 public class HumanResourcesAppApplication {
 	public static void main(String[] args) {
-		String path = "C:\\Users\\ysimsek\\Downloads\\HumanResourcesApp" +
-				"\\HumanResourcesApp\\Human_Resources_Application_Files";
+
+		String path = "C:\\Users\\simse\\IdeaProjects\\HumanResourcesApp\\Human_Resources_Application_Files";
 		File file = new File(path);
 		if (!file.exists()) {
 			if (file.mkdir()) { System.out.println("Human_Resources_Application_Files is created successfully."); }

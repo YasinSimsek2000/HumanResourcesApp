@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.Arrays;
 import java.util.Objects;
 
 @RestController
@@ -65,7 +66,7 @@ public class ManagerController {
             read.close();
             reader.close();
 
-            System.out.println(data);
+            System.out.println(Arrays.toString(data));
             return new ResponseEntity<>(data, HttpStatus.OK);
         } catch (Exception ignored) {return null;}
     }

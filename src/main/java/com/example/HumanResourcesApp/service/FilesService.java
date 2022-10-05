@@ -87,8 +87,7 @@ public class FilesService implements IFilesService {
     }
 
     public Path findPath (String Class, Long ID, String fileName) throws Exception {
-        String path = "C:\\Users\\ysimsek\\Downloads\\HumanResourcesApp\\" +
-                "HumanResourcesApp\\Human_Resources_Application_Files\\";
+        String path = "C:\\Users\\simse\\IdeaProjects\\HumanResourcesApp\\Human_Resources_Application_Files\\";
         String path2 = "\\";
 
         switch (Class) {

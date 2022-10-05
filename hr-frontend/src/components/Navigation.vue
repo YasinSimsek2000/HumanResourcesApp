@@ -45,7 +45,7 @@ import axios from "axios";
 export default {
   data () {
     return {
-      mail: "", name_surname: "", image: '1_SILVER_TECHNOLOGY/ProfilePhoto.png',
+      mail: "", name_surname: "", image: '',
 
       items: [
         { text: 'My Files', icon: 'mdi-folder', link: '/my-files'},
